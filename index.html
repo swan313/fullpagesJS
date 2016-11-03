@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="js/jquery.fullPage.css">
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            min-width:1000px;
+        }
+        div{
+            text-align: center;
+        }
+        .nav,.nav2{
+            width: 100%;
+            position:fixed;
+            top:0;
+        }
+        .nav1{
+            height: 60px;
+            background:#000040;
+            opacity: 0.5;
+        }
+        .nav2{
+            height: 60px;
+            font-size: 50px;
+        }
+
+        #square {
+            border: 1px solid #888;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+        }
+        .se-l,.se-r{
+            height:100%;
+            float:left;
+        }
+        .se-l{
+            width:40%;
+            background:#fff;
+        }
+        .se-r{
+            width:60%;
+            background:#f99;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <div class="nav1"></div>
+    <div class="nav2">adfafdsafsf</div>
+</div>
+<div id="dowebok">
+    <div class="section">
+        <div style="height:80%;background:#23527c;">
+            <div class="slide">1</div>
+            <div class="slide">2</div>
+            <div class="slide">3</div>
+            <div class="slide">4</div>
+        </div>
+
+    </div>
+    <div class="section">
+        <h3>第二屏</h3>
+        <div id="square"></div>
+    </div>
+    <div class="section">
+        <div class="se-l"></div>
+        <div class="se-r"></div>
+    </div>
+    <div class="section">
+        <h3>第四屏</h3>
+    </div>
+
+</div>
+<div style="height:400px;background:green;">
+    sdfsdfsdf
+</div>
+<script src="js/move.js"></script>
+<script src="js/jquery-1.11.3.js"></script>
+
+<!-- jquery.easings.min.js 用于 easing 参数，也可以使用完整的 jQuery UI 代替，如果不需要设置 easing 参数，可去掉改文件 -->
+<!--<script src="js/jquery.easings.min.js"></script>-->
+
+<!-- 如果 scrollOverflow 设置为 true，则需要引入 jquery.slimscroll.min.js，一般情况下不需要 -->
+<!--<script src="js/jquery.slimscroll.min.js"></script>-->
+
+
+<script src="js/jquery.fullPage.js"></script>
+
+<script>
+    $(function(){
+        $('#dowebok').fullpage({
+//            verticalCentered: false,    //是否垂直居中
+            sectionsColor:['#f00000','#f90','#9f0','#f93'],     // 设置section的背景颜色
+            anchors:['pag1','pag2','pag3','pag4'],
+            controlArrows: false,   //幻灯片的左右箭头
+            slidesNavigation: true,
+            autoScrolling: true,   //false是按浏览器滚动条方式滚动
+            scrollBar: true,        //右侧滚动条
+            paddingTop:'60px',      //设置每一个section顶部和底的padding, paddingtop/paddingBottom
+            fixedElements: '.nav',   //设置的完素固定不动
+//            continuousVertical: false,  //是否循环滚动
+//            animateAnchor:true,     //锚链接是否可以控制滚动动画
+            loopHorizontal:true,
+            slidesNavPosition: 'top',
+            afterLoad: function(link,index){
+                if(index == 2){
+                    move('#square')
+                            .x(500)
+                            .y(200)
+                            .ease('in-out')
+                            .then()
+                            .x(-500)
+                            .then()
+                            .y(-200)
+                            .duration('2s')
+                            .delay('.5s')
+                            .rotate(180)
+                            .pop()
+                            .pop()
+                            .end();
+                }
+            }
+
+        });
+
+        setInterval(function(){
+            $.fn.fullpage.moveSlideRight();
+        }, 3000);
+
+
+
+    });
+</script>
+</body>
+</html>

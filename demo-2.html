@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="js/jquery.fullPage.css">
+    <link rel="stylesheet" href="css/examples.css"/>
+
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="dowebok">
+    <div class="section section1">
+        <h2>它，终于来了。</h2>
+        <p>为了充分发挥体积小巧以及佩戴于手腕的优势，Apple Watch带来全新的科技和互动方式。它可以让你更快速便捷地完成早已习惯的事， 也可以实现过去根本无法企及的新功能。因此，这将会是焕然一新的使用体验，也将实现与你前所未有的贴近。</p>
+        <a href="#">进一步了解</a>
+    </div>
+    <div class="section section2">
+        <h2>真正与你贴近的个人设备</h2>
+        <a href="#">进一步了解</a>
+    </div>
+    <div class="section section3">
+        <h2>非同一般的精准计时</h2>
+        <p>高级手表向来计时精准为本，Apple Watch更是如此，它与你的iPhone配合使用，同全球标准时间的误差不超过50毫秒。而且你可以对 表盘进行个性化设定，以更具个性和意义的方式显示时间，使其更贴合你的生活和日程需要。</p>
+        <a href="#">进一步了解</a>
+    </div>
+    <div class="section section4">
+        <h2>在三个特点鲜明的系列中找到你的风格</h2>
+        <div class="row">
+            <div class="column">
+                <img id="aaa" src="img/primary_large_2x.jpg" class="primary">
+                <h4 class="primary"></h4>
+                <div class="intro">
+                    <p>
+                        不锈钢或深空黑色不锈钢表壳，蓝宝石水晶镜面，搭配多款时尚表带
+                    </p>
+                    <a href="#" class="more">了解更多</a>
+                </div>
+            </div>
+            <div class="column">
+                <img src="img/sport_large_2x.jpg" class="sport">
+                <h4 class="sport"></h4>
+                <div class="intro">
+                    <p>
+                        银色或深空灰色的阳极氧化铝金属表壳，强化Ion-X玻璃，搭配亮丽柔韧的表带
+                    </p>
+                    <a href="#" class="more">了解更多</a>
+                </div>
+            </div>
+            <div class="column">
+                <img src="img/edition_large_2x.jpg" class="edition">
+                <h4 class="edition"></h4>
+                <div class="intro">
+                    <p>
+                        18K黄金或玫瑰金表壳，蓝宝石水晶镜面，搭配精雕细琢的表带及表扣
+                    </p>
+                    <a href="#" class="more">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.3.js"></script>
+
+<!-- jquery.easings.min.js 用于 easing 参数，也可以使用完整的 jQuery UI 代替，如果不需要设置 easing 参数，可去掉改文件 -->
+<!--<script src="js/jquery.easings.min.js"></script>-->
+
+<!-- 如果 scrollOverflow 设置为 true，则需要引入 jquery.slimscroll.min.js，一般情况下不需要 -->
+<!--<script src="js/jquery.slimscroll.min.js"></script>-->
+
+<script src="js/jquery.fullPage.js"></script>
+<script src="js/move.js"></script>
+<script>
+    $(function(){
+        $('#dowebok').fullpage({
+            verticalCentered: false,
+            //sectionsColor: ['aqua','crimson','green','darkviolet'],
+            anchors: ['page1','page2','page3','page4'],
+            navigation: true,
+            navigationTooltips: ['它，终于来了','真正与你贴近的个人设备','非同一般的精准计时','在三个特点鲜明的系列中找到你的风格'],
+            //滚动到某一屏后产生的动画效果
+            afterLoad: function(link,index){
+                switch (index){
+                    case 1:
+                        move('.section1 h2').scale(1.5).end();
+                        move('.section1 p').set('margin-top','5%').end();
+                        break;
+                    case 2:
+                        move('.section2 h2').scale(0.7).end();
+                        break;
+                    case 3:
+                        move('.section3 h2').set('margin-left','20%').end();
+                        move('.section3 p').set('margin-left','20%').end();
+                        break;
+                    case 4:
+                        move('.section4 img.primary').rotate(360).end(function(){
+                            move('.section4 img.sport').rotate(360).end(function(){
+                                move('.section4 img.edition').rotate(360).end(function(){
+                                    move('.section4 h4.primary').scale(1.2).end(function(){
+                                        move('.section4 h4.sport').scale(1.2).end(function(){
+                                            move('.section4 h4.edition').scale(1.2).end();
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                        break;
+                    default :
+                        break;
+                }
+            },
+            //离开某一屏后恢复到初始效果
+            onLeave: function(link, index){
+                switch (index){
+                    case 1:
+                        move('.section1 h2').scale(1).end();
+                        move('.section1 p').set('margin-top','800px').end();
+                        break;
+                    case 2:
+                        move('.section2 h2').scale(1).end();
+                        break;
+                    case 3:
+                        move('.section3 h2').set('margin-left','-1500px').end();
+                        move('.section3 p').set('margin-left','1500px').end();
+                        break;
+                    case 4:
+                        move('.section4 img.primary').rotate(-360).end();
+                        move('.section4 img.sport').rotate(-360).end();
+                        move('.section4 img.edition').rotate(-360).end();
+                        move('.section4 h4.primary').scale(1).end();
+                        move('.section4 h4.sport').scale(1).end();
+                        move('.section4 h4.edition').scale(1).end();
+                        break;
+                    default :
+                        break;
+                }
+            }
+
+        });
+
+
+    });
+</script>
+</body>
+</html>
